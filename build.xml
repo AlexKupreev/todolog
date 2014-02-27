@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="todolog" default="dev-build" basedir="./">
+	<target name="dev-build">
+		<echo msg="Development Build..." />
+	</target>
+</project>
