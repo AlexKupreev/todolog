@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="todolog" default="dev-build" basedir="./">
-	<target name="dev-build">
+	<target name="dev-build" depends="prepare,phpcs">
 		<echo msg="Development Build..." />
+	</target>
+
+	<!-- Prepare files -->
+	<target name="prepare">
+		<echo msg="Preparing files..." />
+		<reflexive>
+			<fileset dir="./">
+				<include name="**/*.php" />
+				<exclude name="**/vendor/**" />
+			</fileset>
+		<filterchain>
+			<tabtospaces tablength="4" />
+		</filterchain>
+		</reflexive>
+	</target>
+
+	<!-- Run PHP Code Sniffer -->
+	<target name="phpcs">
+		<phpcodesniffer standard="PSR1" showSniffs="true" showWarnings="true" encoding="utf-8">
+			<fileset dir="./">
+				<include name="**/*.php" />
+				<exclude name="**/vendor/**" />
+			</fileset>
+			<formatter type="full" usefile="false"/>
+		</phpcodesniffer>
+		<phpcodesniffer standard="PSR2" showSniffs="true" showWarnings="true" encoding="utf-8">
+			<fileset dir="./">
+				<include name="**/*.php" />
+				<exclude name="**/vendor/**" />
+			</fileset>
+			<formatter type="full" usefile="false"/>
+		</phpcodesniffer>
 	</target>
 </project>

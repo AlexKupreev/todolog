@@ -7,22 +7,22 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 
 // Take environment variable set by server
 if ($_SERVER['APP_ENV'] !== 'production') {
-	define('ENVIRONMENT', 'development');
+    define('ENVIRONMENT', 'development');
 } else {
-	define('ENVIRONMENT', 'production');
+    define('ENVIRONMENT', 'production');
 }
 
 define('EXT', '.php');
 
 // Set error reporting
 if (ENVIRONMENT !== 'production') {
-	error_reporting(E_ALL);
-	ini_set('display_errors', '1');
-	ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
 } else {
-	error_reporting(E_ALL);
-	ini_set('display_errors', '0');
-	ini_set('display_startup_errors', '0');
+    error_reporting(E_ALL);
+    ini_set('display_errors', '0');
+    ini_set('display_startup_errors', '0');
 }
 
 define('DOCROOT', realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR);
