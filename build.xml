@@ -35,4 +35,14 @@
 			<formatter type="full" usefile="false"/>
 		</phpcodesniffer>
 	</target>
+
+	<!-- Measure project metrics using PHPLOC -->
+	<target name="phploc">
+		<phploc reportType="cli">
+			<fileset dir="./">
+				<include name="**/*.php" />
+				<exclude name="**/vendor/**" />
+			</fileset>
+		</phploc>
+	</target>
 </project>
