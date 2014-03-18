@@ -1,10 +1,5 @@
 <?php
 
-// We need PHP 5.4+
-if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-    die('This app runs correctly on PHP 5.4+');
-}
-
 // Take environment variable set by server
 if ($_SERVER['APP_ENV'] !== 'production') {
     define('ENVIRONMENT', 'development');
@@ -29,6 +24,9 @@ define('DOCROOT', realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR);
 
 $appRelative = DOCROOT.DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app';
 define('APPPATH', realpath($appRelative) . DIRECTORY_SEPARATOR);
+
+// Preliminary system reqirements check
+require APPPATH . 'check' . EXT;
 
 // We'll use the composer autoloading, so no need to setup vendor path constant
 require DOCROOT. '..' . DIRECTORY_SEPARATOR . 'vendor/autoload' . EXT;
