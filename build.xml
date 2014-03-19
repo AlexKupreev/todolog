@@ -4,45 +4,51 @@
 		<echo msg="Development Build..." />
 	</target>
 
+	<target name="_fileset">
+		<patternset id="php">
+			<include name="**/*.php"/>
+			<exclude name="**/vendor/**" />
+		</patternset>
+
+		<fileset dir="./" id="files.php">
+			<patternset refid="php"/>
+		</fileset>
+	</target>
+
 	<!-- Prepare files -->
-	<target name="prepare">
+	<target name="prepare" depends="_fileset">
 		<echo msg="Preparing files..." />
 		<reflexive>
-			<fileset dir="./">
-				<include name="**/*.php" />
-				<exclude name="**/vendor/**" />
-			</fileset>
-		<filterchain>
-			<tabtospaces tablength="4" />
-		</filterchain>
+			<fileset refid="files.php" />
+			<filterchain>
+				<tabtospaces tablength="4" />
+			</filterchain>
 		</reflexive>
 	</target>
 
 	<!-- Run PHP Code Sniffer -->
 	<target name="phpcs">
 		<phpcodesniffer standard="PSR1" showSniffs="true" showWarnings="true" encoding="utf-8">
-			<fileset dir="./">
-				<include name="**/*.php" />
-				<exclude name="**/vendor/**" />
-			</fileset>
+			<fileset refid="files.php" />
 			<formatter type="full" usefile="false"/>
 		</phpcodesniffer>
 		<phpcodesniffer standard="PSR2" showSniffs="true" showWarnings="true" encoding="utf-8">
-			<fileset dir="./">
-				<include name="**/*.php" />
-				<exclude name="**/vendor/**" />
-			</fileset>
+			<fileset refid="files.php" />
 			<formatter type="full" usefile="false"/>
 		</phpcodesniffer>
 	</target>
 
 	<!-- Measure project metrics using PHPLOC -->
-	<target name="phploc">
+	<target name="phploc" depends="prepare">
 		<phploc reportType="cli">
-			<fileset dir="./">
-				<include name="**/*.php" />
-				<exclude name="**/vendor/**" />
-			</fileset>
+			<fileset refid="files.php" />
 		</phploc>
+	</target>
+
+	<!-- Copy/Paste detector for PHP code using PHPCPD -->
+	<target name="phpcpd" depends="prepare">
+		<phpcpd>
+			<fileset refid="files.php" />
+		</phpcpd>
 	</target>
 </project>
