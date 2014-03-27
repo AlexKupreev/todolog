@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="todolog" default="dev-build" basedir="./">
+<project name="todolog" default="dev-build" >
+	<property name="dir.base" value="./" />
+	<property name="dir.build" value="${dir.base}/build" />
+
 	<target name="dev-build" depends="prepare,phpcs">
 		<echo msg="Development Build..." />
 	</target>
@@ -10,7 +13,7 @@
 			<exclude name="**/vendor/**" />
 		</patternset>
 
-		<fileset dir="./" id="files.php">
+		<fileset dir="${dir.base}" id="files.php">
 			<patternset refid="php"/>
 		</fileset>
 	</target>
@@ -25,6 +28,8 @@
 			</filterchain>
 		</reflexive>
 	</target>
+
+	<target name="clean" depends="prepare"></target>
 
 	<!-- Run PHP Code Sniffer -->
 	<target name="phpcs">
@@ -50,5 +55,12 @@
 		<phpcpd>
 			<fileset refid="files.php" />
 		</phpcpd>
+	</target>
+
+	<!-- Estimate code metrics using PHP_Depend -->
+	<target name="pdepend" depends="prepare,clean">
+		<phpdepend>
+			<fileset refid="files.php"/>
+		</phpdepend>
 	</target>
 </project>
