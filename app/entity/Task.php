@@ -2,14 +2,18 @@
 
 namespace app\entity;
 
-class Task {
+class Task
+{
     public $id;
+    public $userId;
     public $title;
     public $description;
     public $notes;
 
-    function __construct($data) {
+    public function __construct($data)
+    {
         $this->id = $data['id'];
+        $this->userId = $data['userId'];
         $this->title = $data['title'];
         $this->description = $data['description'];
         $this->notes = $data['notes'];

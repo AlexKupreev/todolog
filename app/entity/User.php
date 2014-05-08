@@ -2,14 +2,18 @@
 
 namespace app\entity;
 
-class User {
+class User
+{
     public $id;
-    public $email;
+    public $login;
     public $password;
+    public $email;
 
-    public function __construct($data) {
-        $this->id = $data['id'];
-        $this->email = $data['email'];
+    public function __construct($data)
+    {
+        $this->id = (int)$data['id'];
+        $this->login = $data['login'];
         $this->password = $data['password'];
+        $this->email = $data['email'];
     }
 }

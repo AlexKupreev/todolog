@@ -14,6 +14,11 @@ use Behat\Gherkin\Node\PyStringNode,
 //   require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
+require_once 'app/mock/repository/User.php';
+
+use app\mock\repository as MockRepo;
+use app\repository as Repo;
+
 /**
  * Features context.
  */
@@ -30,15 +35,51 @@ class FeatureContext extends BehatContext
         // Initialize your context here
     }
 
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        doSomethingWith($argument);
-//    }
-//
+    /**
+     * @Given /^following users:$/
+     */
+    public function followingUsers(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^I am a registered user "([^"]*)"$/
+     */
+    public function iAmARegisteredUser($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^I create a task with the following information$/
+     */
+    public function iCreateATaskWithTheFollowingInformation(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^task should be created$/
+     */
+    public function taskShouldBeCreated()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^task should not be created$/
+     */
+    public function taskShouldNotBeCreated()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^error message should be returned$/
+     */
+    public function errorMessageShouldBeReturned(PyStringNode $string)
+    {
+        throw new PendingException();
+    }
 }
