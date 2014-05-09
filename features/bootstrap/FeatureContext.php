@@ -14,7 +14,7 @@ use Behat\Gherkin\Node\PyStringNode,
 //   require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
-require_once 'app/mock/repository/User.php';
+require_once 'vendor/autoload.php';
 
 use app\mock\repository as MockRepo;
 use app\repository as Repo;
@@ -56,7 +56,7 @@ class FeatureContext extends BehatContext
      */
     public function iCreateATaskWithTheFollowingInformation(TableNode $table)
     {
-        throw new PendingException();
+        throw new PendingException();        
     }
 
     /**
