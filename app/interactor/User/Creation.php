@@ -6,11 +6,11 @@ use app\entity as Entity;
 use app\repository as Repo;
 
 /**
- * Task Creation Interactor
+ * User Creation Interactor
  */
 class Creation
 {
-    public function __construct(Repo\Task $taskRepo)
+    public function __construct(Repo\User $userRepo)
     {
         
     }

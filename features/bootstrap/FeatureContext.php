@@ -18,12 +18,16 @@ require_once 'vendor/autoload.php';
 
 use app\mock\repository as MockRepo;
 use app\repository as Repo;
+use app\service as Service;
 
 /**
  * Features context.
  */
 class FeatureContext extends BehatContext
 {
+    protected $userRepo;
+    protected $passwordService;
+
     /**
      * Initializes context.
      * Every scenario gets it's own context object.
@@ -32,7 +36,8 @@ class FeatureContext extends BehatContext
      */
     public function __construct(array $parameters)
     {
-        // Initialize your context here
+        $this->userRepo = new MockRepo\User;
+        $this->passwordService = new Service\Password;
     }
 
     /**
@@ -40,7 +45,16 @@ class FeatureContext extends BehatContext
      */
     public function followingUsers(TableNode $table)
     {
-        throw new PendingException();
+        $hash = $table->getHash();
+        foreach ($hash as $row) {
+
+            $data = [
+                'login' => $row['login'],
+                'password' => $this->passwordService->hash($row['password']),
+                'email' => $row['email'],
+            ];
+            $this->userRepo->create($data);
+        }
     }
 
     /**
@@ -56,7 +70,7 @@ class FeatureContext extends BehatContext
      */
     public function iCreateATaskWithTheFollowingInformation(TableNode $table)
     {
-        throw new PendingException();        
+        throw new PendingException();
     }
 
     /**
