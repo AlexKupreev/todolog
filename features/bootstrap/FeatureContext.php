@@ -49,6 +49,7 @@ class FeatureContext extends BehatContext
         foreach ($hash as $row) {
 
             $data = [
+                'id' => $row['id'],
                 'login' => $row['login'],
                 'password' => $this->passwordService->hash($row['password']),
                 'email' => $row['email'],
