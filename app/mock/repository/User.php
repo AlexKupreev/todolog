@@ -36,7 +36,17 @@ class User implements Repo\UserInterface
 
     public function getByLogin($login)
     {
-        
+        if (empty($this->storage)) {
+            return NULL;
+        }
+
+        foreach ($this->storage as $user) {
+            if (strcasecmp($user->login, $login) == 0) {
+                return $user;
+            }
+        }
+
+        return NULL;
     }
 
     protected function isFreeId($id) {

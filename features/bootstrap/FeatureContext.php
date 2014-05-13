@@ -17,6 +17,8 @@ use Behat\Gherkin\Node\PyStringNode,
 require_once 'vendor/autoload.php';
 
 use app\mock\repository as MockRepo;
+use app\mock\service as MockService;
+
 use app\repository as Repo;
 use app\service as Service;
 
@@ -38,6 +40,7 @@ class FeatureContext extends BehatContext
     {
         $this->userRepo = new MockRepo\User;
         $this->passwordService = new Service\Password;
+        $this->sessionService = new MockService\Session;
     }
 
     /**
@@ -61,9 +64,15 @@ class FeatureContext extends BehatContext
     /**
      * @Given /^I am a registered user "([^"]*)"$/
      */
-    public function iAmARegisteredUser($arg1)
+    public function iAmARegisteredUser($login)
     {
-        throw new PendingException();
+        $user = $this->userRepo->getByLogin($login);
+        if (empty($user)) {
+            // TODO fix exception type
+            throw new Exception('No user found');
+        }
+        
+        $this->sessionService->setLoggedInUserId($user->id);
     }
 
     /**
