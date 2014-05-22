@@ -106,4 +106,29 @@ class FeatureContext extends BehatContext
     {
         throw new PendingException();
     }
+
+    /**
+     * @Given /^there are root tasks:$/
+     */
+    public function thereAreRootTasks(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^I get root task list$/
+     */
+    public function iGetRootTaskList()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^I receive the following list:$/
+     */
+    public function iReceiveTheFollowingList(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
 }
