@@ -18,16 +18,18 @@ class Session implements Service\SessionInterface
     /**
      * {@inheritDoc}
      */
-    public function setLoggedInUserId($userId) {
+    public function setLoggedInUserId($userId)
+    {
         self::$session['userId'] = $userId;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getLoggedInUserId() {
+    public function getLoggedInUserId()
+    {
         if (empty(self::$session['userId'])) {
-            return NULL;
+            return null;
         }
 
         return (int)self::$session['userId'];
@@ -36,7 +38,8 @@ class Session implements Service\SessionInterface
     /**
      * {@inheritDoc}
      */
-    public function clean() {
+    public function clean()
+    {
         self::$session = [];
     }
 }

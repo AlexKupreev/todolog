@@ -20,7 +20,7 @@ class User implements Repo\UserInterface
      */
     public function create(array $data)
     {
-        if (empty($data['id']) OR ! $this->isFreeId($data['id'])){
+        if (empty($data['id']) or ! $this->isFreeId($data['id'])) {
             $data['id'] = $this->getUniqId();
         }
         $user = new Entity\User($data);
@@ -37,7 +37,7 @@ class User implements Repo\UserInterface
     public function getByLogin($login)
     {
         if (empty($this->storage)) {
-            return NULL;
+            return null;
         }
 
         foreach ($this->storage as $user) {
@@ -46,14 +46,16 @@ class User implements Repo\UserInterface
             }
         }
 
-        return NULL;
+        return null;
     }
 
-    protected function isFreeId($id) {
+    protected function isFreeId($id)
+    {
         return array_key_exists($id, $this->storage);
     }
 
-    protected function getUniqId() {
+    protected function getUniqId()
+    {
         $keys = array_keys($this->storage);
         if (empty($keys)) {
             return 1;
