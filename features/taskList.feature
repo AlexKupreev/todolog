@@ -12,6 +12,6 @@ Feature: list tasks
 		Given I am a registered user "user"
 		And there are root tasks:
 		| title | description |
-		When I get root task list
+		When I ask root task list
 		Then I receive the following list:
 		| title | description |

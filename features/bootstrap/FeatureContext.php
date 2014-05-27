@@ -116,9 +116,9 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @When /^I get root task list$/
+     * @When /^I ask root task list$/
      */
-    public function iGetRootTaskList()
+    public function iAskRootTaskList()
     {
         throw new PendingException();
     }
