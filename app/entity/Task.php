@@ -9,6 +9,7 @@ class Task
     public $title;
     public $description;
     public $notes;
+    public $children = [];
 
     public function __construct($data)
     {
@@ -17,5 +18,18 @@ class Task
         $this->title = $data['title'];
         $this->description = $data['description'];
         $this->notes = $data['notes'];
+
+        if ( ! empty($data['children']) and is_array($data['children'])) {
+            foreach ($data['children'] as $child) {
+                if ($child instanceof Task) {
+                    $this->children[] = $child;
+                }
+            }
+        }
+    }
+
+    public function addChild(Task $task)
+    {
+        $this->children[] = $task;
     }
 }
