@@ -6,6 +6,7 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
+use PHPUnit_Framework_Assert as Test;
 
 //
 // Require 3rd-party libraries here:
@@ -20,6 +21,7 @@ use app\mock\repository as MockRepo;
 use app\mock\service as MockService;
 
 use app\repository as Repo;
+use app\interactor as Interactor;
 use app\service as Service;
 
 /**
@@ -27,8 +29,12 @@ use app\service as Service;
  */
 class FeatureContext extends BehatContext
 {
+    protected $boolResult;
+
     protected $userRepo;
+    protected $taskRepo;
     protected $passwordService;
+    protected $sessionService;
 
     /**
      * Initializes context.
@@ -39,6 +45,7 @@ class FeatureContext extends BehatContext
     public function __construct(array $parameters)
     {
         $this->userRepo = new MockRepo\User;
+        $this->taskRepo = new MockRepo\Task;
         $this->passwordService = new Service\Password;
         $this->sessionService = new MockService\Session;
     }
@@ -80,7 +87,14 @@ class FeatureContext extends BehatContext
      */
     public function iCreateATaskWithTheFollowingInformation(TableNode $table)
     {
-        throw new PendingException();
+        $data = [];
+        foreach ($table->getNumeratedRows() as $row)
+        {
+            $data[$row[0]] = $row[1];
+        }
+        
+        $taskCreator = new Interactor\Task\Creation($this->taskRepo, $this->userRepo, $this->sessionService);
+        $this->boolResult = $taskCreator->execute($data);
     }
 
     /**
@@ -88,7 +102,7 @@ class FeatureContext extends BehatContext
      */
     public function taskShouldBeCreated()
     {
-        throw new PendingException();
+        Test::assertTrue($this->boolResult);
     }
 
     /**

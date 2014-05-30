@@ -1,6 +1,6 @@
 <?php
 
-namespace app\interactor;
+namespace app\interactor\User;
 
 use app\entity as Entity;
 use app\repository as Repo;

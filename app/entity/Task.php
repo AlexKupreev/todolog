@@ -16,8 +16,8 @@ class Task
         $this->id = $data['id'];
         $this->userId = $data['userId'];
         $this->title = $data['title'];
-        $this->description = $data['description'];
-        $this->notes = $data['notes'];
+        $this->description = ! empty($data['description']) ? $data['description'] : '';
+        $this->notes = ! empty($data['notes']) ? $data['notes'] : '';
 
         if ( ! empty($data['children']) and is_array($data['children'])) {
             foreach ($data['children'] as $child) {
