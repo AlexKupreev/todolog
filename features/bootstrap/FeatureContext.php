@@ -23,6 +23,7 @@ use app\mock\service as MockService;
 use app\repository as Repo;
 use app\interactor as Interactor;
 use app\service as Service;
+use app\request as Request;
 
 /**
  * Features context.
@@ -92,9 +93,11 @@ class FeatureContext extends BehatContext
         {
             $data[$row[0]] = $row[1];
         }
+
+        $request = new Request\Task\Creation($data);
         
         $taskCreator = new Interactor\Task\Creation($this->taskRepo, $this->userRepo, $this->sessionService);
-        $this->boolResult = $taskCreator->execute($data);
+        $this->boolResult = $taskCreator->execute($request);
     }
 
     /**

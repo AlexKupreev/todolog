@@ -4,6 +4,7 @@ namespace app\mock\repository;
 
 use app\entity as Entity;
 use app\repository as Repo;
+use app\request as Request;
 
 class Task implements Repo\TaskInterface
 {
@@ -21,10 +22,11 @@ class Task implements Repo\TaskInterface
 
     /**
      * Creates Task entity from a data array
-     * @param array $data
+     * @param int $userId
+     * @param Request\Task\Creation $request
      * @return Entity\Task
      */
-    public function create(array $data)
+    public function create($userId, Request\Task\Creation $request)
     {
         if (empty($data['id']) or ! $this->isFreeId($data['id'])) {
             $data['id'] = $this->getUniqId();
