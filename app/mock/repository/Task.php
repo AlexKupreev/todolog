@@ -26,13 +26,13 @@ class Task implements Repo\TaskInterface
      * @param Request\Task\Creation $request
      * @return Entity\Task
      */
-    public function create($userId, Request\Task\Creation $request)
+    public function create($id, $userId, Request\Task\Creation $request)
     {
-        if (empty($data['id']) or ! $this->isFreeId($data['id'])) {
-            $data['id'] = $this->getUniqId();
+        if (empty($id) or ! $this->isFreeId($id)) {
+            $id = $this->getUniqId();
         }
-        $task = new Entity\Task($data);
-        $this->taskIds[] = $task->id;
+        $task = new Entity\Task($id, $userId, $request->getTitle(), $request->getDescription(), $request->getNotes());
+        $this->taskIds[] = $task->getId();
 
         return $task;
     }
