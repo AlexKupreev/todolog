@@ -10,7 +10,11 @@ interface TaskInterface
      * Creates a task from a data array
      * @param int $id
      * @param int $userId
-     * @param Request\Task\Creation $request
+     * @param string $title
+     * @param string $description
+     * @param string $notes
+     * 
+     * @return Entity\Task
      */
-    public function create($id, $userId, Request\Task\Creation $request);
+    public function create($id, $userId, $title, $description, $notes);
 }

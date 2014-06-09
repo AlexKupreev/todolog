@@ -43,7 +43,13 @@ class Creation
     public function execute(Request\Task\Creation $request)
     {
         $userId = $this->session->getLoggedInUserId();
-        $this->taskRepo->create(null, $userId, $request);
+        $this->taskRepo->create(
+            null,
+            $userId,
+            $request->getTitle(),
+            $request->getDescription(),
+            $request->getNotes()
+        );
 
         return true;
     }
