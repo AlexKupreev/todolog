@@ -5,10 +5,13 @@ namespace app\repository;
 interface UserInterface
 {
     /**
-     * Creates a user from a data array
-     * @param array $data
+     * Creates a User Entity
+     * @param int $id
+     * @param string $login
+     * @param string $password
+     * @param string $email
      */
-    public function create(array $data);
+    public function create($id, $login, $password, $email);
 
     /**
      * Gets User Entity by id

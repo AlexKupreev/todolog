@@ -18,13 +18,13 @@ class User implements Repo\UserInterface
      * @param array $data
      * @return Entity\User 
      */
-    public function create(array $data)
+    public function create($id, $login, $password, $email)
     {
-        if (empty($data['id']) or ! $this->isFreeId($data['id'])) {
-            $data['id'] = $this->getUniqId();
+        if (empty($id) or ! $this->isFreeId($id)) {
+            $id = $this->getUniqId();
         }
-        $user = new Entity\User($data);
-        $this->storage[$user->id] = $user;
+        $user = new Entity\User($id, $login, $password, $email);
+        $this->storage[$user->getId()] = $user;
 
         return $user;
     }
@@ -41,7 +41,7 @@ class User implements Repo\UserInterface
         }
 
         foreach ($this->storage as $user) {
-            if (strcasecmp($user->login, $login) == 0) {
+            if (strcasecmp($user->getLogin(), $login) == 0) {
                 return $user;
             }
         }

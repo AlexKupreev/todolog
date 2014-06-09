@@ -4,16 +4,53 @@ namespace app\entity;
 
 class User
 {
-    public $id;
-    public $login;
-    public $password;
-    public $email;
+    /**
+     *
+     * @var int $id
+     */
+    protected $id;
 
-    public function __construct($data)
+    /**
+     *
+     * @var string $login
+     */
+    protected $login;
+
+    /**
+     * Hashed password
+     * @var string $password
+     */
+    protected $password;
+
+    /**
+     *
+     * @var string $email
+     */
+    protected $email;
+
+    public function __construct($id, $login, $password, $email)
     {
-        $this->id = (int)$data['id'];
-        $this->login = $data['login'];
-        $this->password = $data['password'];
-        $this->email = $data['email'];
+        $this->id = (int)$id;
+        $this->login = (string)$login;
+        $this->password = (string)$password;
+        $this->email = (string)$email;
+    }
+
+    /**
+     * Returns user ID
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Returns user login
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
     }
 }

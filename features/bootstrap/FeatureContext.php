@@ -59,13 +59,12 @@ class FeatureContext extends BehatContext
         $hash = $table->getHash();
         foreach ($hash as $row) {
 
-            $data = [
-                'id' => $row['id'],
-                'login' => $row['login'],
-                'password' => $this->passwordService->hash($row['password']),
-                'email' => $row['email'],
-            ];
-            $this->userRepo->create($data);
+            $this->userRepo->create(
+                $row['id'],
+                $row['login'],
+                $this->passwordService->hash($row['password']),
+                $row['email']
+            );
         }
     }
 
@@ -80,7 +79,7 @@ class FeatureContext extends BehatContext
             throw new Exception('No user found');
         }
         
-        $this->sessionService->setLoggedInUserId($user->id);
+        $this->sessionService->setLoggedInUserId($user->getId());
     }
 
     /**
