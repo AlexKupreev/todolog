@@ -42,11 +42,11 @@ class Task
 
     public function __construct($id, $userId, $title, $description, $notes, $children = [])
     {
-        $this->id = $id;
-        $this->userId = $userId;
-        $this->title = $title;
-        $this->description = $description;
-        $this->notes = $notes;
+        $this->id = (int)$id;
+        $this->userId = (int)$userId;
+        $this->title = (string)$title;
+        $this->description = (string)$description;
+        $this->notes = (string)$notes;
 
         if (! empty($children) and is_array($children)) {
             foreach ($children as $child) {
