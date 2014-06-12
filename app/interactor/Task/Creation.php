@@ -6,6 +6,7 @@ use app\entity as Entity;
 use app\repository as Repo;
 use app\service as Service;
 use app\request as Request;
+use app\response as Response;
 
 /**
  * Task Creation Interactor
@@ -51,6 +52,9 @@ class Creation
             $request->getNotes()
         );
 
-        return true;
+        $response = new Response\Task\Creation;
+        $response->setStatusOk();
+
+        return $response;
     }
 }

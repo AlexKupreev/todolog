@@ -104,7 +104,7 @@ class FeatureContext extends BehatContext
      */
     public function taskShouldBeCreated()
     {
-        Test::assertTrue($this->response);
+        Test::assertTrue($this->response->isStatusOk());
     }
 
     /**
