@@ -30,7 +30,7 @@ use app\request as Request;
  */
 class FeatureContext extends BehatContext
 {
-    protected $boolResult;
+    protected $response;
 
     protected $userRepo;
     protected $taskRepo;
@@ -96,7 +96,7 @@ class FeatureContext extends BehatContext
         $request = new Request\Task\Creation($data);
         
         $taskCreator = new Interactor\Task\Creation($this->taskRepo, $this->userRepo, $this->sessionService);
-        $this->boolResult = $taskCreator->execute($request);
+        $this->response = $taskCreator->execute($request);
     }
 
     /**
@@ -104,7 +104,7 @@ class FeatureContext extends BehatContext
      */
     public function taskShouldBeCreated()
     {
-        Test::assertTrue($this->boolResult);
+        Test::assertTrue($this->response);
     }
 
     /**
@@ -112,7 +112,7 @@ class FeatureContext extends BehatContext
      */
     public function taskShouldNotBeCreated()
     {
-        throw new PendingException();
+        Test::assertFalse($this->response);
     }
 
     /**
