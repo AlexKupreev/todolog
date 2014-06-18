@@ -24,6 +24,7 @@ use app\repository as Repo;
 use app\interactor as Interactor;
 use app\service as Service;
 use app\request as Request;
+use app\response as Response;
 
 /**
  * Features context.
@@ -94,9 +95,12 @@ class FeatureContext extends BehatContext
         }
 
         $request = new Request\Task\Creation($data);
+        $response = new Response\Task\Creation;
         
         $taskCreator = new Interactor\Task\Creation($this->taskRepo, $this->userRepo, $this->sessionService);
-        $this->response = $taskCreator->execute($request);
+        $taskCreator->execute($request, $response);
+
+        $this->response = $response;
     }
 
     /**
@@ -112,7 +116,7 @@ class FeatureContext extends BehatContext
      */
     public function taskShouldNotBeCreated()
     {
-        Test::assertFalse($this->response);
+        Test::assertFalse($this->response->isStatusOk());
     }
 
     /**

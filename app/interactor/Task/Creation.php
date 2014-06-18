@@ -41,7 +41,7 @@ class Creation
         $this->session = $session;
     }
 
-    public function execute(Request\Task\Creation $request)
+    public function execute(Request\Task\Creation $request, Response\Task\Creation $response)
     {
         $userId = $this->session->getLoggedInUserId();
         $this->taskRepo->create(
@@ -52,9 +52,6 @@ class Creation
             $request->getNotes()
         );
 
-        $response = new Response\Task\Creation;
         $response->setStatusOk();
-
-        return $response;
     }
 }

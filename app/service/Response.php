@@ -6,7 +6,8 @@ namespace app\service;
  * Base Response class
  *
  */
-abstract class Response {
+abstract class Response
+{
 
     const OK = 200;
     const ERROR_VALIDATION = 400;
