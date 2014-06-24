@@ -4,7 +4,6 @@ namespace app\mock\repository;
 
 use app\entity as Entity;
 use app\repository as Repo;
-use app\request as Request;
 
 class Task implements Repo\TaskInterface
 {
@@ -15,33 +14,35 @@ class Task implements Repo\TaskInterface
     protected $root = [];
 
     /**
-     * Array of occupied task IDs
-     * @var array
-     */
-    protected $taskIds = [];
-
-    /**
      * {@inheritDoc}
      */
     public function create($id, $userId, $title, $description, $notes)
     {
-        if (empty($id) or ! $this->isFreeId($id)) {
-            $id = $this->getUniqId();
-        }
-        $task = new Entity\Task($id, $userId, $title, $description, $notes);
-        $this->taskIds[] = $task->getId();
+        return new Entity\Task($id, $userId, $title, $description, $notes);
+    }
 
-        return $task;
+    /**
+     * {@inheritDoc}
+     */
+    public function add(Entity\Task $task)
+    {
+        if ( ! $task->getId() or ! $this->isFreeId($task->getId())) {
+            $task->setId($this->getUniqId());
+        }
+
+        $this->root[$task->getId()] = $task;
+
+        return true;
     }
 
     protected function isFreeId($id)
     {
-        return array_key_exists($id, $this->taskIds);
+        return array_key_exists($id, $this->root);
     }
 
     protected function getUniqId()
     {
-        $keys = array_keys($this->taskIds);
+        $keys = array_keys($this->root);
         if (empty($keys)) {
             return 1;
         }

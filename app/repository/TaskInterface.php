@@ -2,12 +2,12 @@
 
 namespace app\repository;
 
-use app\request as Request;
+use app\entity as Entity;
 
 interface TaskInterface
 {
     /**
-     * Creates a task from a data array
+     * Creates a task object from a data array
      * @param int $id
      * @param int $userId
      * @param string $title
@@ -17,4 +17,11 @@ interface TaskInterface
      * @return Entity\Task
      */
     public function create($id, $userId, $title, $description, $notes);
+
+    /**
+     * Adds a task to the storage
+     * @param Entity\Task $task
+     *
+     */
+    public function add(Entity\Task $task);
 }

@@ -44,13 +44,16 @@ class Creation
     public function execute(Request\Task\Creation $request, Response\Task\Creation $response)
     {
         $userId = $this->session->getLoggedInUserId();
-        $this->taskRepo->create(
+
+        $task = new Entity\Task(
             null,
             $userId,
             $request->getTitle(),
             $request->getDescription(),
             $request->getNotes()
         );
+
+        $this->taskRepo->add($task);
 
         $response->setStatusOk();
     }

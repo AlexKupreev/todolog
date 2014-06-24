@@ -86,4 +86,13 @@ class Task
     {
         return $this->notes;
     }
+
+    /**
+     * Sets unique ID of task
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 }
