@@ -17,6 +17,6 @@ abstract class Request
      */
     protected function extractFromArray(array $data, $param, $default = null)
     {
-        return empty($data[$param]) ? $default : $data[$param];
+        return isset($data[$param]) ? $data[$param] : $default;
     }
 }
