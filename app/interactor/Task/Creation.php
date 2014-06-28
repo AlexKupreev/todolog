@@ -45,7 +45,7 @@ class Creation
     {
         $userId = $this->session->getLoggedInUserId();
 
-        $task = new Entity\Task(
+        $task = $this->taskRepo->create(
             null,
             $userId,
             $request->getTitle(),

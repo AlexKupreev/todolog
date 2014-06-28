@@ -26,7 +26,7 @@ class Task implements Repo\TaskInterface
      */
     public function add(Entity\Task $task)
     {
-        if ( ! $task->getId() or ! $this->isFreeId($task->getId())) {
+        if (! $task->getId() or ! $this->isFreeId($task->getId())) {
             $task->setId($this->getUniqId());
         }
 
