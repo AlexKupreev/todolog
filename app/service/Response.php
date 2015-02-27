@@ -34,8 +34,38 @@ abstract class Response
         $this->status = self::OK;
     }
 
+    /**
+     * TODO Set status as invalid
+     */
+    public function setStatusInvalid()
+    {
+        $this->status = self::ERROR_VALIDATION;
+    }
+
+    /**
+     * TODO Set status as error
+     */
+    public function setStatusError()
+    {
+        $this->status = self::ERROR;
+    }
+
+    /**
+     * Checks response status
+     *
+     * @return bool
+     */
     public function isStatusOk()
     {
         return (bool)($this->status === self::OK);
+    }
+
+    /**
+     * TODO
+     * @param array $errors
+     */
+    public function setErrors(array $errors = NULL)
+    {
+        
     }
 }

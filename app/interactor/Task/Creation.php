@@ -7,6 +7,7 @@ use app\repository as Repo;
 use app\service as Service;
 use app\request as Request;
 use app\response as Response;
+use app\validator as Validator;
 
 /**
  * Task Creation Interactor
@@ -45,16 +46,28 @@ class Creation
     {
         $userId = $this->session->getLoggedInUserId();
 
-        $task = $this->taskRepo->create(
-            null,
-            $userId,
-            $request->getTitle(),
-            $request->getDescription(),
-            $request->getNotes()
-        );
+        $validator = new Validator\Task\Creation($request);
+        
+        if ($validator->isValid()) {
+            try {
+                $task = $this->taskRepo->create(
+                    null,
+                    $userId,
+                    $request->getTitle(),
+                    $request->getDescription(),
+                    $request->getNotes()
+                );
 
-        $this->taskRepo->add($task);
+                $this->taskRepo->add($task);
 
-        $response->setStatusOk();
+                $response->setStatusOk();
+            } catch (Exception $e) {
+                $response->setErrors($e->getErrors());
+                $response->setStatusError();
+            }            
+        } else {
+            $response->setErrors($validator->getErrors());
+            $response->setStatusInvalid();
+        }        
     }
 }
